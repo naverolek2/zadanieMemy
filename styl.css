@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(37,37,37,255);
+}
+.header1 {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 15%;
+    background-color: rgba(24,24,24,255);
+    color: whitesmoke;
+}
+img {
+    width: 400px;
+    height: 300px;
+    padding-bottom: 10px;
+}
+.obrazy {
+    margin: 0 auto;
+    width: 20%;
+}
