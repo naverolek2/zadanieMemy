@@ -1,2 +1,16 @@
 {
+    "name": "machinacyfrowa/zadaniememy",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Machinacyfrowa\\Zadaniememy\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Naverolek2",
+            "email": "sebaskiba11@gmail.com"
+        }
+    ],
+    "require": {}
 }
