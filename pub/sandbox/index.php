@@ -24,7 +24,14 @@
             $targetDir = "img/";
             $sourceFileName = $_FILES['uploadedFile']['name'];
             $tempURL = $_FILES['uploadedFile']['tmp_name'];
+            $imgInfo = getimagesize($tempURL);
+            if(!is_array($imgInfo)) {
+                die("BŁĄD: Podany plik nie jest obrazem!");
+            }
             $targetURL = $targetDir . $sourceFileName;
+            if(file_exists($targetURL)) {
+                die("BŁĄD: Podany plik już istnieje");
+            }
             move_uploaded_file($tempURL, $targetURL);
 
 
