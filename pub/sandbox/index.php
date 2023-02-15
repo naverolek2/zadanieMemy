@@ -52,7 +52,7 @@
             $db->query($q);
             //move_uploaded_file($tempURL, $targetURL);
             imagewebp($gdImage, $targetURL);
-
+            $db->close();
 
         }
     ?>
