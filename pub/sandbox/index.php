@@ -20,7 +20,10 @@
         if(isset($_POST['submit'])) {
             //echo "<pre>";
             //var_dump($_FILES);
-
+            $db = new mysqli('localhost', 'root', '', 'cms_ss');
+            if($db->connect_error) {
+                die("Connection failed");
+            }
             $targetDir = "img/";
             $sourceFileName = $_FILES['uploadedFile']['name'];
 
@@ -44,8 +47,9 @@
             if(file_exists($targetURL)) {
                 die("BŁĄD: Podany plik już istnieje");
             }
-
-
+            $date = date("Y-m-d H:i:s");
+            $q = "INSERT INTO post (timestamp, filename) VALUES ( '$date' , '$newFileName');";
+            $db->query($q);
             //move_uploaded_file($tempURL, $targetURL);
             imagewebp($gdImage, $targetURL);
 
