@@ -34,7 +34,7 @@
                 die("BŁĄD: Podany plik nie jest obrazem!");
             }
 
-            $newFileName = hash("sha256", $sourceFileName) . hrtime(true) . ".webp";
+            $newFileName =   hash("sha256", $sourceFileName) . hrtime(true). ".webp";
 
             $imageString = file_get_contents($tempURL);
             $gdImage = @imagecreatefromstring($imageString);
