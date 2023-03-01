@@ -17,7 +17,9 @@ require('./../src/config.php');
         Post::upload($_FILES['uploadedFile']['tmp_name']);
     }
 ?>
-
+<pre>
 <?php
-var_dump(Post::getLast());
-?>
+var_dump(Post::getPage());
+?>  
+</pre>
+
