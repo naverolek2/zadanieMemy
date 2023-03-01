@@ -14,7 +14,7 @@ $arrayId = 0;
 $ilosc = count($resultSet);
 while ($ilosc > $arrayId) {
 $filename = $resultSet[$arrayId]["filename"];
-echo("<img src=\"$targetDir/$filename\" alt=\"\"> <br>"); 
+echo("<img src=\"img\\$filename\" alt=\"\"> <br>"); 
 $arrayId = $arrayId + 1;  
 }
 
