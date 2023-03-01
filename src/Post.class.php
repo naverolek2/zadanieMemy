@@ -17,24 +17,24 @@ class Post {
         $hash = hash("sha256", $randomNumber);
         //tworzymy docelowy url pliku graficznego na serwerze
         $newFileName = $targetDir . $hash . ".webp";
-        //sprawdź czy plik przypadkiem już nie istnieje
+        //czy plik istnieje 
         if(file_exists($newFileName)) {
             die("BŁĄD: Podany plik już istnieje!");
         }
         //zaczytujemy cały obraz z folderu tymczasowego do stringa
         $imageString = file_get_contents($tempFileName);
-        //generujemy obraz jako obiekt klasy GDImage
-        //@ przed nazwa funkcji powoduje zignorowanie ostrzeżeń
+        
+        //@nie pokazuje zagrozen
         $gdImage = @imagecreatefromstring($imageString);
         //zapisujemy w formacie webp
         imagewebp($gdImage, $newFileName);
 
         global $db;
-        //stwórz kwerendę
+        
         $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?)");
-        //przygotuj znacznik czasu dla bazy danych
+        
         $dbTimestamp = date("Y-m-d H:i:s");
-        //zapisz dane do bazy
+        
         $query->bind_param("ss", $dbTimestamp, $newFileName);
         if(!$query->execute())
             die("Błąd zapisu do bazy danych");
