@@ -7,13 +7,18 @@ Route::add('/', function() {
     //strona wyświetlająca obrazki
     //echo "Strona główna";
     global $twig;
-    $twig->display("index.html.twig");
+    //pobieranie 10 najnowszych postów
+    $postArray = Post::getPage();
+    $twigData = array('postArray' => $postArray,
+                      'pageTitle' => "Strona Główna");
+    $twig->display("index.html.twig", $twigData);
 });
 
 Route::add('/upload', function() {
     //wgrywanie obrazków    
     global $twig;
-    $twig->display("upload.html.twig");
+    $twigData = array('pageTitle' => "Strona Główna");
+    $twig->display("upload.html.twig", $twigData);
 
 });
 
@@ -22,7 +27,8 @@ Route::add('/upload', function() {
     if(isset($_POST['submit']))  {
         Post::upload($_FILES['uploadedFile']['tmp_name']);
     }
-    $twig->display("index.html.twig");
+    header("Location: http://localhost/zadanieMemy/pub");
+    
     
 }, 'post');
 
