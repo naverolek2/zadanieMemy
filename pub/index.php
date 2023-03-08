@@ -17,6 +17,15 @@ Route::add('/upload', function() {
 
 });
 
+Route::add('/upload', function() {
+    global $twig;
+    if(isset($_POST['submit']))  {
+        Post::upload($_FILES['uploadedFile']['tmp_name']);
+    }
+    $twig->display("index.html.twig");
+    
+}, 'post');
+
 Route::run('/zadanieMemy/pub');
 
 ?>
