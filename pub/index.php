@@ -9,8 +9,10 @@ Route::add('/', function() {
     global $twig;
     //pobieranie 10 najnowszych postów
     $postArray = Post::getPage();
+    
     $twigData = array('postArray' => $postArray,
-                      'pageTitle' => "Strona Główna");
+                      'pageTitle' => "Strona Główna"
+                    );
     $twig->display("index.html.twig", $twigData);
 });
 

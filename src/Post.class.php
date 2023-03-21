@@ -3,12 +3,14 @@ class Post {
     private int $id;
     private string $filename;
     private string $timestamp;
+    private string $title;
 
 
-    function __construct(int $i, string $f, string $t) {
+    function __construct(int $i, string $f, string $t, string $ti) {
         $this->id = $i;
         $this->filename = $f;
         $this->timestamp = $t;
+        $this->title = $ti;
     }
 
     public function getFilename() : string {
@@ -17,6 +19,10 @@ class Post {
     public function getTimestamp() : string {
         return $this->timestamp;
     }
+    public function getTitle() : string {
+        return $this->title;
+    }
+    
 
 
     //zwraca ostatnio dodany obraz
@@ -25,14 +31,14 @@ class Post {
         global $db;
         
         $query = $db->prepare("SELECT * FROM post ORDER BY timestamp DESC LIMIT 1");
-       //JEBAĆ CIE MICHAŁ
+       
         $query->execute();
        
         $result = $query->get_result();
         
         $row = $result->fetch_assoc();
         //tworzenie nowego obiektu
-        $p = new Post($row['ID'], $row['filename'], $row['timestamp']);
+        $p = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title']);
         
         return $p; 
     }
@@ -48,7 +54,7 @@ class Post {
         $postsArray = array();
         // pobiera wiersz jako tabele asocjacyjną
         while($row = $result->fetch_assoc()) {
-            $post = new Post($row['ID'], $row['filename'], $row['timestamp']);
+            $post = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title']);
             array_push($postsArray, $post);
         }
         return $postsArray;
@@ -57,7 +63,7 @@ class Post {
 
     static function upload(string $tempFileName) {
         
-        $targetDir = "img/";
+        $targetDir = "/img";
         
         $imgInfo = getimagesize($tempFileName);
         
@@ -86,11 +92,11 @@ class Post {
 
         global $db;
         
-        $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?)");
+        $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?, ?)");
         
         $dbTimestamp = date("Y-m-d H:i:s");
-        
-        $query->bind_param("ss", $dbTimestamp, $newFileName);
+        $titleString = $_POST['uploadedTitle'];
+        $query->bind_param("sss", $dbTimestamp, $newFileName, $titleString);
         if(!$query->execute())
             die("Błąd zapisu do bazy danych");
 

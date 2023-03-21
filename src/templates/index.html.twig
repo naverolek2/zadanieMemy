@@ -3,9 +3,10 @@
 <h1>{{pageTitle}}</h1>
 {% for post in postArray %}
 <div id="post">
-
+    <h6>Tytuł: {{post.getTitle()}}</h6>
     <img src="{{post.getFilename()}}">
     <h6>Data dodania: {{post.getTimestamp()}}</h6>
+    
 
 </div>
 {% endfor %}  
