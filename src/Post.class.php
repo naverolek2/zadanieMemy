@@ -63,7 +63,7 @@ class Post {
 
     static function upload(string $tempFileName) {
         
-        $targetDir = "/img";
+        $targetDir = "img/";
         
         $imgInfo = getimagesize($tempFileName);
         
