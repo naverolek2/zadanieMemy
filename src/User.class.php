@@ -1,14 +1,29 @@
 <?php
 class User {
-    private $email;
+    
+    private int $id;
+    private string $email;
 
-
-    public function __construct($email) {
-            $this->email = $email;
+    public function __construct($id, $email) {
+        $this->id = $id;    
+        $this->email = $email;
+            
     }
 
     public function getName() : string {
         return $this->email;
+    }
+    public function getID() : int {
+        return $this->id;
+    }
+    public static function getNameByID(int $userID) {
+        global $db;
+        $query = $db->prepare("SELECT email FROM user WHERE id = ? LIMIT 1");
+        $query->bind_param('i', $userID);
+        $query->execute();
+        $result = $query->get_result();
+        $row = $result->fetch_assoc();
+        return $row['email'];
     }
     
 
@@ -30,9 +45,9 @@ class User {
         $row = $result->fetch_assoc();
         $passwordHash = $row['password'];
         if(password_verify($password, $passwordHash)) {
-            $u = new User($email);
+            $u = new User($row['ID'], $email);
             $_SESSION['user'] = $u;
-            
+
         }
     }
 
