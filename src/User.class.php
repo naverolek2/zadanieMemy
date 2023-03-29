@@ -36,18 +36,21 @@ class User {
     }
 
 
-    public static function login(string $email, string $password) {
+    public static function login(string $email, string $password) : bool {
         global $db;
         $query = $db->prepare("SELECT * FROM user WHERE email = ? LIMIT 1");
         $query->bind_param('s', $email);
         $query->execute();
         $result = $query->get_result();
         $row = $result->fetch_assoc();
-        $passwordHash = $row['password'];
+        @$passwordHash = $row['password'];
         if(password_verify($password, $passwordHash)) {
             $u = new User($row['ID'], $email);
             $_SESSION['user'] = $u;
-
+            return true;
+        }
+        else {
+            return false;
         }
     }
     
@@ -64,7 +67,6 @@ class User {
             return false;
         }
     }
-
 
 }
 
