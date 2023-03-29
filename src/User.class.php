@@ -50,6 +50,20 @@ class User {
 
         }
     }
+    
+    public static function isAuth() : bool {
+        if(isset($_SESSION['user'])) {
+            if($_SESSION['user'] instanceof User) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
 
 
 }

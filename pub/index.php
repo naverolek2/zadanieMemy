@@ -24,11 +24,14 @@ Route::add('/upload', function() {
     //wgrywanie obrazków    
     global $twig;
     $twigData = array('pageTitle' => "Strona Główna");
-    if(isset($_SESSION['user'])) {
+    if(User::isAuth()) {
         $twigData['user'] = $_SESSION['user'];
+        $twig->display("upload.html.twig", $twigData);
     }
-    $twig->display("upload.html.twig", $twigData);
-
+    else {
+        http_response_code(403);
+    }
+    
 });
 
 Route::add('/upload', function() {
