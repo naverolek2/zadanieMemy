@@ -9,6 +9,9 @@
     <input type="submit" name="submit" value="Zaloguj">
 
 </form> 
+{% if message is defined %}
+<span class="message">{{ message }}</span>
+{% endif %}
 
 </div>
 
