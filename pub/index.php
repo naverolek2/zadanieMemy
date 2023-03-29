@@ -81,7 +81,27 @@ Route::add('/login', function() {
 
 }, 'post');
 
+Route::add('/admin', function() {
+    global $twig;                     
+    if(User::isAuth()) {
+         $postArray = Post::getPage(1,100);
+        $twigData = array('postArray' => $postArray);
+        $twig->display("admin.html.twig", $twigData);
+    }
+    else{
+        http_response_code(403);
+    }
+    
+} );
 
+Route::add('/admin/remove/([0-9])*', function($id) {
+    if(Post::remove($id)) {
+        header("Location: http://localhost/zadanieMemy/pub/admin/");
+    }
+    else {
+        die("Nie udało się usunąć podanego obrazka");
+    }
+}, );
 Route::run('/zadanieMemy/pub');
 
 ?>
