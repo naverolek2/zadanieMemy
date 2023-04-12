@@ -13,7 +13,15 @@
     <h6>Autor: {{post.getAuthorName()}}</h6>
     <img src="{{post.getFilename()}}">
     <h6>Data dodania: {{post.getTimestamp()}}</h6>
-    
+    <h6>Ilość polubień : {{post.getLikeCount()}} </h6>
+    <form action=""></form>
+    <button>
+        <a href="/zadanieMemy/pub/addLike/{{post.getID}}/{{User.getID}}" style="text-decoration: none;">+</a>
+    </button>
+    <button>
+        <a href="/zadanieMemy/pub/removeLike/{{post.getID}}/{{User.getID}}" style="text-decoration: none;">-</a>
+    </button>
+
 
 </div>
 {% endfor %}  

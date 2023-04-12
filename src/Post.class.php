@@ -6,16 +6,20 @@ class Post {
     private string $title;
     private string $authorID;
     private string $authorName;
+    private int $likeCount;
 
 
-    function __construct(int $i, string $f, string $t, string $ti, string $authorID) {
+    function __construct(int $i, string $f, string $t, string $ti, string $authorID, $like) {
         $this->id = $i;
         $this->filename = $f;
         $this->timestamp = $t;
         $this->title = $ti;
         $this->authorID = $authorID;
+        $this->likeCount = $like;
         global $db;
+        
         $this->authorName = User::getNameByID($this->authorID);
+        
     }
 
     public function getID() : int {
@@ -33,7 +37,11 @@ class Post {
     public function getAuthorName() :string {
         return $this->authorName;
     }
-
+    public function getLikeCount() : int {
+        return $this->likeCount;
+    }
+    
+    
 
     //zwraca ostatnio dodany obraz
     static function getLast() : Post {
@@ -48,7 +56,7 @@ class Post {
         
         $row = $result->fetch_assoc();
         //tworzenie nowego obiektu
-        $p = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title'], $row['userID']);
+        $p = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title'], $row['userID'], $row['liked']);
         
         return $p; 
     }
@@ -64,12 +72,14 @@ class Post {
         $postsArray = array();
         // pobiera wiersz jako tabele asocjacyjną
         while($row = $result->fetch_assoc()) {
-            $post = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title'], $row['userID']);
+            $post = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title'], $row['userID'], $row['liked']);
             array_push($postsArray, $post);
         }
         return $postsArray;
 
     }
+    
+    
 
     static function upload(string $tempFileName, $userID) {
         
@@ -116,8 +126,22 @@ class Post {
         $query = $db->prepare("UPDATE post SET removed = 1 WHERE id = ?");
         $query->bind_param("i", $id);
         return $query->execute();
+    }
+    public static function changeLike($addOrRem, $id) {
+        global $db;
+        if($addOrRem == -1) {
+           $query = $db->prepare("UPDATE post SET liked = liked - 1 WHERE id = ?");
+        }
+        elseif($addOrRem == 1) {
+            $query = $db->prepare("UPDATE post SET liked = liked + 1 WHERE id = ?");
+        }
+        $query->bind_param("i", $id);
+        if(!$query->execute()) {
+            die("Błąd");
+        }
         
     }
+   
 }
 
 ?>

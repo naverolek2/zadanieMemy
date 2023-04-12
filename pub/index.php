@@ -20,6 +20,30 @@ Route::add('/', function() {
     $twig->display("index.html.twig", $twigData);
 });
 
+Route::add("/addLike/([0-9])*", function($id) {
+    if(User::isAuth()) {
+    $addOrRem = 1;
+    Post::changeLike($addOrRem, $id);
+    header("Location: http://localhost/zadanieMemy/pub/");     
+   }
+   else{
+       http_response_code(403);
+   }
+
+    
+});
+
+Route::add("/removeLike/([0-9])*", function($id) {
+    if(User::isAuth()) {
+        $addOrRem = -1;
+        Post::changeLike($addOrRem, $id);
+        header("Location: http://localhost/zadanieMemy/pub/");     
+       }
+       else{
+           http_response_code(403);
+       }
+});
+
 Route::add('/upload', function() {
     //wgrywanie obrazków    
     global $twig;
