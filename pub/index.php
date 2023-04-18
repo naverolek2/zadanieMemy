@@ -20,6 +20,32 @@ Route::add('/', function() {
     $twig->display("index.html.twig", $twigData);
 });
 
+Route::add('/', function() {
+    global $twig;   
+    if(isset($_POST['like'])) {
+        if(Liked::likeAdd($_POST['userID'], $_POST['postID'])) {
+            header("Location: http://localhost/zadanieMemy/pub/es");
+        }
+        else {
+            header("Location: http://localhost/zadanieMemy/pub");
+        }
+    }
+    if(isset($_POST['dislike'])) {
+        if(Liked::likeDelete($_POST['userID'], $_POST['postID'])) {
+            header("Location: http://localhost/zadanieMemy/pub");
+        }
+        else {
+            header("Location: http://localhost/zadanieMemy/pub");
+        }
+    }
+    
+    
+    
+}, 'post');
+
+
+
+
 Route::add('/upload', function() {
     //wgrywanie obrazków    
     global $twig;
@@ -35,7 +61,7 @@ Route::add('/upload', function() {
 });
 
 Route::add('/upload', function() {
-    global $twig;
+    global $twig;   
     if(isset($_POST['submit']))  {
         Post::upload($_FILES['uploadedFile']['tmp_name'], $_POST['userID']);
     }

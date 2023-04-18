@@ -6,9 +6,11 @@ class Post {
     private string $title;
     private string $authorID;
     private string $authorName;
+    private int $likeCount;
 
 
-    function __construct(int $i, string $f, string $t, string $ti, string $authorID) {
+
+    function __construct(int $i, string $f, string $t, string $ti, string $authorID, $like) {
         $this->id = $i;
         $this->filename = $f;
         $this->timestamp = $t;
@@ -16,6 +18,8 @@ class Post {
         $this->authorID = $authorID;
         global $db;
         $this->authorName = User::getNameByID($this->authorID);
+        $this->likeCount = $like;
+
     }
 
     public function getID() : int {
@@ -33,6 +37,9 @@ class Post {
     public function getAuthorName() :string {
         return $this->authorName;
     }
+    public function getLikeCount() : int {
+        return $this->likeCount;
+    }
 
 
     //zwraca ostatnio dodany obraz
@@ -48,7 +55,7 @@ class Post {
         
         $row = $result->fetch_assoc();
         //tworzenie nowego obiektu
-        $p = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title'], $row['userID']);
+        $p = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title'], $row['userID'], $row['likes']);
         
         return $p; 
     }
@@ -64,7 +71,7 @@ class Post {
         $postsArray = array();
         // pobiera wiersz jako tabele asocjacyjną
         while($row = $result->fetch_assoc()) {
-            $post = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title'], $row['userID']);
+            $post = new Post($row['ID'], $row['filename'], $row['timestamp'], $row['title'], $row['userID'], $row['likes']);
             array_push($postsArray, $post);
         }
         return $postsArray;
@@ -118,6 +125,8 @@ class Post {
         return $query->execute();
         
     }
+    
+
 }
 
 ?>
