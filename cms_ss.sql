@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 12 Kwi 2023, 15:49
+-- Czas generowania: 22 Mar 2023, 15:46
 -- Wersja serwera: 10.4.24-MariaDB
 -- Wersja PHP: 8.0.19
 
@@ -24,18 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `isliked`
---
-
-CREATE TABLE `isliked` (
-  `ID` int(11) NOT NULL,
-  `user_ID` int(11) NOT NULL,
-  `post_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Struktura tabeli dla tabeli `post`
 --
 
@@ -44,20 +32,18 @@ CREATE TABLE `post` (
   `timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `filename` varchar(1024) NOT NULL,
   `title` text NOT NULL,
-  `userID` int(255) NOT NULL,
-  `liked` int(255) NOT NULL,
-  `removed` tinyint(1) NOT NULL DEFAULT 0
+  `userID` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `post`
 --
 
-INSERT INTO `post` (`ID`, `timestamp`, `filename`, `title`, `userID`, `liked`, `removed`) VALUES
-(1, '2023-04-12 15:48:36', 'img/ea036693156016150666650c7e570c3bb1264ce9a1f8265c642692f87d4727f8.webp', 'geg', 3, 9, 0),
-(2, '2023-04-12 15:02:44', 'img/4458378570289dc7a210da4a1d6b78ff0dabea878f0a40acb41a8fae758668ac.webp', 'hhh', 3, -3, 0),
-(3, '2023-04-12 15:02:44', 'img/3fbce6c1a59c6af4515a631a04664a710bb88e9c2945209ba1b0158a09cb9fea.webp', 'hree', 3, -3, 0),
-(4, '2023-04-12 15:02:44', 'img/5fdbe1dfc38ad1672fe4b49352a200a18b0c7e5a2ac7baf2778ac61792b89ca5.webp', 'essa123123', 3, -3, 1);
+INSERT INTO `post` (`ID`, `timestamp`, `filename`, `title`, `userID`) VALUES
+(1, '2023-03-22 15:42:32', 'img/ea036693156016150666650c7e570c3bb1264ce9a1f8265c642692f87d4727f8.webp', 'geg', 3),
+(2, '2023-03-22 15:43:24', 'img/4458378570289dc7a210da4a1d6b78ff0dabea878f0a40acb41a8fae758668ac.webp', 'hhh', 3),
+(3, '2023-03-22 15:44:08', 'img/3fbce6c1a59c6af4515a631a04664a710bb88e9c2945209ba1b0158a09cb9fea.webp', 'hree', 3),
+(4, '2023-03-22 15:44:20', 'img/5fdbe1dfc38ad1672fe4b49352a200a18b0c7e5a2ac7baf2778ac61792b89ca5.webp', 'essa123123', 3);
 
 -- --------------------------------------------------------
 
