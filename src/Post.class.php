@@ -109,7 +109,7 @@ class Post {
 
         global $db;
         
-        $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?, ?, ?)");
+        $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?, ?, 0, 0, ?)");
         
         $dbTimestamp = date("Y-m-d H:i:s");
         $titleString = $_POST['uploadedTitle'];
