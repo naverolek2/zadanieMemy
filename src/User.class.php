@@ -34,6 +34,22 @@ class User {
         $query->bind_param('ss', $email, $passwordHash);
         return $query->execute();
     }
+    static function isAdmin($id) : bool{
+        global $db;
+        $query = $db->prepare("SELECT * FROM user WHERE id = ? LIMIT 1");
+        $query->bind_param('s', $id);
+        $query->execute();
+        $result = $query->get_result();
+        $row = $result->fetch_assoc();
+        if($row['isAdmin'] == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
 
 
     public static function login(string $email, string $password) : bool {

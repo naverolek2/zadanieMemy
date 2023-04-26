@@ -14,7 +14,8 @@ class Liked {
         $query4->execute();
         $result2 = $query4->get_result();
             // Ma się równać 0, gdyż jak się równa 1 to oznacza, że już użytkownik polubił to zdjęcie.
-        if (mysqli_num_rows($result) == 0) { 
+            //Stan 0 (nie dał like ani dislike)
+        if (mysqli_num_rows($result) == 0 && mysqli_num_rows($result2) == 0) { 
             // Dodaje polubienie do bazy danych
             $query2 = $db->prepare("UPDATE post SET likes = likes + 1 WHERE id = ?");
             $query2->bind_param('i', $postID);
@@ -25,16 +26,15 @@ class Liked {
             $query3->bind_param('ii', $postID, $userID);
             $query3->execute();
         }
+        // Stan 1 (gdy dał dislike, ale nie dał like)
         elseif(mysqli_num_rows($result) == 0 && mysqli_num_rows($result2) == 1) {
                         // Dodaje polubienie do bazy danych
                         $query2 = $db->prepare("UPDATE post SET likes = likes + 1 WHERE id = ?");
                         $query2->bind_param('i', $postID);
                         $query2->execute();
                         
-                        // Dodaje fakt, że użytkownik dodał polubienie do bazy danych
-                        $query3 = $db->prepare("INSERT INTO liked (post_id, user_id) VALUES (?, ?)");
-                        $query3->bind_param('ii', $postID, $userID);
-                        $query3->execute();
+                       
+                       
 
                         $query5 = $db->prepare("DELETE FROM disliked WHERE user_id = ? AND post_id = ?");
                         $query5->bind_param('ii',$userID, $postID);
@@ -42,12 +42,8 @@ class Liked {
             
 
         }
-        elseif(mysqli_num_rows($result) == 1) {
-            // bez tego nie działa, nie ruszać!!!!
-        }
-        elseif(mysqli_num_rows($result) == 1 && mysqli_num_rows($result2) == 1) {
-            die("coś zjebałeś i nagle użytkownik polubił i odpolubił zdjęcie");
-        }
+        
+        
         
     }
     static function likeDelete($userID, $postID) {
@@ -69,9 +65,7 @@ class Liked {
             $query3 = $db->prepare("DELETE FROM liked WHERE user_id = ? AND post_id = ?");
             $query3->bind_param('ii',$userID, $postID);
             $query3->execute();
-            $query5 = $db->prepare("INSERT INTO disliked (post_id, user_id) VALUES (?, ?)");
-            $query5->bind_param('ii', $postID, $userID);
-            $query5->execute();
+            
         }
         elseif(mysqli_num_rows($result) == 0 && mysqli_num_rows($result2) == 0) {
             $query2 = $db->prepare("UPDATE post SET likes = likes - 1 WHERE id = ?");
@@ -83,21 +77,7 @@ class Liked {
             $query3->execute();
 
         }
-        elseif(mysqli_num_rows($result) == 1 && mysqli_num_rows($result2) == 0) {
-            $query2 = $db->prepare("UPDATE post SET likes = likes - 1 WHERE id = ?");
-            $query2->bind_param('i', $postID);
-            $query2->execute();
-
-            $query4 = $db->prepare("DELETE FROM liked WHERE user_id = ? AND post_id = ?");
-            $query4->bind_param('ii',$userID, $postID);
-            $query4->execute();
-
-
-            $query3 = $db->prepare("INSERT INTO disliked (post_id, user_id) VALUES (?, ?)");
-            $query3->bind_param('ii', $postID, $userID);
-            $query3->execute();
-
-        }
+        
         
 
     }

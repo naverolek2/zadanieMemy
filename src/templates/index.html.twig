@@ -1,8 +1,25 @@
 {% include 'header.html.twig' %}
 <div id="pageContainer">
 <h1>{{pageTitle}}</h1>
-{% if  user is defined %}
+
+{% if isAdmin == 1 %} 
+    <a href="http://localhost/zadanieMemy/pub/Login" class="admin">Admin</a>
+
+{% endif %}
+{% if user is not defined %}
+<div id="logowania">
+    <a href="http://localhost/zadanieMemy/pub/Login">Logowanie</a>
+    <a href="http://localhost/zadanieMemy/pub/register">Zarejestruj się</a>
+</div>
+
+{% endif%}
+
+
+{% if user is defined %}
 <div id="loggedUser">
+    <a href="http://localhost/zadanieMemy/pub/logout">Wyloguj</a>
+
+    <a href="http://localhost/zadanieMemy/pub/upload" class="upload">Upload</a>
     Zalogowany użytkownik: {{ user.getName }}
 </div>   
 

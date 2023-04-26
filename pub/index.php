@@ -10,9 +10,21 @@ Route::add('/', function() {
     global $twig;
     //pobieranie 10 najnowszych postów
     $postArray = Post::getPage();
-    
+    if(isset($_SESSION['user'])) {
+        if(User::isAdmin($_SESSION['user']->getID())) {
+            $isAdmin = 1;
+        }
+        else {
+            $isAdmin = 0;
+        }
+    }
+    else {
+        $isAdmin = 0;
+    }
+   
     $twigData = array('postArray' => $postArray,
                       'pageTitle' => "Strona Główna",
+                      'isAdmin' =>  $isAdmin
                       );
     if(isset($_SESSION['user'])) {
         $twigData['user'] = $_SESSION['user'];
@@ -70,12 +82,22 @@ Route::add('/upload', function() {
     
 }, 'post');
 
+Route::add('/logout', function () {
+    if(isset($_SESSION['user'])) {
+        session_destroy();
+        header("Location: http://localhost/zadanieMemy/pub");
+        }
+        else {
+            die("Użytkownik nie był zalogowany");
+        }
+});
 
 Route::add('/register', function() {
     global $twig;
     $twigData = array('pageTitle' => "Zarejestruj użytkownika");
     $twig->display("register.html.twig", $twigData);
 });
+
 
 Route::add('/register', function() {
     global $twig;
@@ -108,8 +130,12 @@ Route::add('/login', function() {
 }, 'post');
 
 Route::add('/admin', function() {
-    global $twig;                     
+    global $twig;                
+    
+    
     if(User::isAuth()) {
+        
+        if(User::isAdmin($_SESSION['user']->getID())) {
          $postArray = Post::getPage(1,100);
         $twigData = array('postArray' => $postArray);
         $twig->display("admin.html.twig", $twigData);
@@ -117,6 +143,11 @@ Route::add('/admin', function() {
     else{
         http_response_code(403);
     }
+    }  
+    else {
+        http_response_code(403);
+    }
+    
     
 } );
 
@@ -128,6 +159,11 @@ Route::add('/admin/remove/([0-9])*', function($id) {
         die("Nie udało się usunąć podanego obrazka");
     }
 }, );
+
+
+
+
+
 Route::run('/zadanieMemy/pub');
 
 ?>

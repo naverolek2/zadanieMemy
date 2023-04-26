@@ -24,3 +24,6 @@ div#loggedUser {
 img.thumbnail {
     max-width: 300px;
 }
+#logowania  {
+    text-decoration: none;
+} 
