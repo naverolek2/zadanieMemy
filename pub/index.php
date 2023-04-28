@@ -132,11 +132,11 @@ Route::add('/login', function() {
 Route::add('/admin', function() {
     global $twig;                
     
-    
     if(User::isAuth()) {
-        
         if(User::isAdmin($_SESSION['user']->getID())) {
-         $postArray = Post::getPage(1,100);
+            
+
+        $postArray = Post::getPage(1,100);
         $twigData = array('postArray' => $postArray);
         $twig->display("admin.html.twig", $twigData);
     }
@@ -153,7 +153,7 @@ Route::add('/admin', function() {
 
 Route::add('/admin/remove/([0-9])*', function($id) {
     if(Post::remove($id)) {
-        header("Location: http://localhost/zadanieMemy/pub/admin/");
+        header("Location: http://localhost/zadanieMemy/pub/admin");
     }
     else {
         die("Nie udało się usunąć podanego obrazka");

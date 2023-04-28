@@ -11,7 +11,7 @@
     {% for post in postArray %}
 <div id="post">
     <tr>
-        <td><img class="thumbnail" src="./../{{post.getFilename()}}" alt=""></td>
+        <td><img class="thumbnail" src="./{{post.getFilename()}}" alt="błąd załadowania"></td>
         <td>Tytuł: {{post.getTitle()}}</td>
         <td>Autor: {{post.getAuthorName()}}</td>
         <td>Data dodania: {{post.getTimestamp()}}</td>  

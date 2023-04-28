@@ -34,6 +34,7 @@ class User {
         $query->bind_param('ss', $email, $passwordHash);
         return $query->execute();
     }
+    
     static function isAdmin($id) : bool{
         global $db;
         $query = $db->prepare("SELECT * FROM user WHERE id = ? LIMIT 1");

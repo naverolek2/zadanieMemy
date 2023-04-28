@@ -81,6 +81,25 @@ class Liked {
         
 
     }
+    public static function getScore(int $postId) : int {
+        global $db;
+        $query = $db->prepare("SELECT likes FROM post WHERE id = ?");
+        $query->bind_param('i', $postId);
+        if($query->execute()){
+            $result = $query->get_result();
+            if($result->num_rows > 0) {
+                $row = $result->fetch_row();
+                if($row[0] == NULL) {
+                    return 0;
+                } else 
+                    return $row[0];
+            }
+                
+            else return 0;
+        }
+        return 0;
+    }
+
 
 
 

@@ -38,7 +38,7 @@ class Post {
         return $this->authorName;
     }
     public function getLikeCount() : int {
-        return $this->likeCount;
+        return $this->likeCount = Liked::getScore($this->id);
     }
 
 
