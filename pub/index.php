@@ -36,18 +36,18 @@ Route::add('/', function() {
     global $twig;   
     if(isset($_POST['like'])) {
         if(Liked::likeAdd($_POST['userID'], $_POST['postID'])) {
-            header("Location: http://localhost/zadanieMemy/pub/es");
+            header("Location: http://localhost/zadanieMemy/pub/");
         }
         else {
-            header("Location: http://localhost/zadanieMemy/pub");
+            header("Location: http://localhost/zadanieMemy/pub/");
         }
     }
     if(isset($_POST['dislike'])) {
         if(Liked::likeDelete($_POST['userID'], $_POST['postID'])) {
-            header("Location: http://localhost/zadanieMemy/pub");
+            header("Location: http://localhost/zadanieMemy/pub/");
         }
         else {
-            header("Location: http://localhost/zadanieMemy/pub");
+            header("Location: http://localhost/zadanieMemy/pub/");
         }
     }
     

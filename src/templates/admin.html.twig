@@ -9,7 +9,7 @@
         <th>Wyklucz</th>
     </tr>
     {% for post in postArray %}
-<div id="post">
+
     <tr>
         <td><img class="thumbnail" src="./{{post.getFilename()}}" alt="błąd załadowania"></td>
         <td>Tytuł: {{post.getTitle()}}</td>
@@ -23,7 +23,7 @@
     
     
 
-</div>
+
 {% endfor %}  
 
 </table>
