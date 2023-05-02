@@ -34,7 +34,8 @@ Route::add('/', function() {
 
 Route::add('/', function() {
     global $twig;   
-    if(isset($_POST['like'])) {
+    if(isset($_SESSION['user'])) {
+        if(isset($_POST['like'])) {
         if(Liked::likeAdd($_POST['userID'], $_POST['postID'])) {
             header("Location: http://localhost/zadanieMemy/pub/");
         }
@@ -50,6 +51,12 @@ Route::add('/', function() {
             header("Location: http://localhost/zadanieMemy/pub/");
         }
     }
+    }
+    else {
+        header("Location: http://localhost/zadanieMemy/pub/");
+
+    }
+    
     
     
     
