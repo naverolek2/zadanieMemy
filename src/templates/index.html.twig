@@ -1,8 +1,21 @@
-{% include 'header.html.twig' %}
-<div id="pageContainer">
-<h1>{{pageTitle}}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageTitle|default("Strona z memami") }}</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
 
-{% if isAdmin == 1 %} 
+<div id="pageContainer">
+    <header>
+        <div id="tytuldiv">
+        <a href="http://localhost/zadanieMemy/pub/" id="tytul">{{pageTitle}}</a>  
+      </div>
+      {% if isAdmin == 1 %} 
     <a href="http://localhost/zadanieMemy/pub/admin" id="admin">Admin</a>
 {% endif %}
 {% if user is not defined %}
@@ -10,19 +23,31 @@
     <a href="http://localhost/zadanieMemy/pub/Login">Logowanie</a>
     <a href="http://localhost/zadanieMemy/pub/register">Zarejestruj się</a>
 </div>
-
 {% endif%}
-
 
 {% if user is defined %}
-<div id="loggedUser">
-    <a href="http://localhost/zadanieMemy/pub/logout">Wyloguj</a>
+<div id="przyk">
+ <div id="loggedUser">
+    
 
-    <a href="http://localhost/zadanieMemy/pub/upload" class="upload">Upload</a>
+    
     Zalogowany użytkownik: {{ user.getName }}
-</div>   
+    <a href="http://localhost/zadanieMemy/pub/upload" class="upload">Upload</a>
+    <a href="http://localhost/zadanieMemy/pub/logout">Wyloguj</a>
+</div>      
+</div>
+
 
 {% endif%}
+    </header>
+    
+  
+
+
+
+
+
+
 {% for post in postArray %}
 <div id="post">
     <h6>Tytuł: {{post.getTitle()}}</h6>

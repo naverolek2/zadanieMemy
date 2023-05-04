@@ -1,25 +1,48 @@
-{% include 'header.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageTitle|default("Strona z memami") }}</title>
+    <link rel="stylesheet" href="upload.css">
+</head>
+<body>
+    
+
+
 <div id="pageContainer">
-<h1>{{pageTitle}}</h1>
-{% if  user is defined %}
+<header>
+    <div id="tytuldiv">
+      <a href="http://localhost/zadanieMemy/pub/" id="tytul">{{pageTitle}}</a>  
+    </div>
+    
+    {% if  user is defined %}
 <div id="loggedUser">
     Zalogowany użytkownik: {{ user.getName }}
 </div>   
 
 {% endif%}
-<form action="" method="post" enctype="multipart/form-data">
-    <label for="uploadedFileInput">
+
+
+</header>
+
+
+
+
+<form action="" method="post" enctype="multipart/form-data" id="formularzWgrywania">
+    <label for="uploadedFileInput" class="labelkaForm">
         Wybierz plik do wgrania na serwer:
     </label><br>
-    <input type="file" name="uploadedFile" id="uploadedFileInput" required><br>
+    <input type="file" name="uploadedFile" id="uploadedFileInput" required class="inputForm"><br>
     {% if user is defined %}
     <input type="hidden" name="userID" value="{{ user.getID }}">
     {% endif %}
-    <label for="uploadedFileNameInput">
+    <label for="uploadedFileNameInput" class="labelkaForm">
         Wybierz tytuł mema 
     </label><br>
-    <input type="text" name="uploadedTitle" id="uploadedFileNameInput" required><br>
-    <input type="submit" value="Wyślij plik" name="submit"><br>
+    <input type="text" name="uploadedTitle" id="uploadedFileNameInput" required placeholder="no wpisz już"><br>
+    <input type="submit" value="Wyślij plik" name="submit" class="inputForm"><br>
 </form>
 
 

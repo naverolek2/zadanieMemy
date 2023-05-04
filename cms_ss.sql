@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 28 Kwi 2023, 22:41
+-- Czas generowania: 04 Maj 2023, 11:26
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -59,14 +59,6 @@ CREATE TABLE `post` (
   `userID` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Zrzut danych tabeli `post`
---
-
-INSERT INTO `post` (`ID`, `timestamp`, `filename`, `title`, `likes`, `removed`, `userID`) VALUES
-(1, '2023-04-28 22:40:20', 'img/b50c3714a2cf1d8d4a58e759265906f241104f21b85cbd9dbe1032b24ad781d2.webp', 'tghjath', 10, 0, 1),
-(2, '2023-04-28 22:40:20', 'img/bda87e09944b23da2803c0d43e3450a7779565ff16f84f1fb48a8839220b16aa.webp', 'hhhh', -50, 0, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -93,7 +85,10 @@ INSERT INTO `user` (`ID`, `email`, `isAdmin`, `password`) VALUES
 (6, 'm@m.m', 0, '$argon2i$v=19$m=65536,t=4,p=1$b2tFRFlzSzZvZURmd3VNRA$HORhXjWuFZzynbPvg8FJQiG7WPDx5s7jdnVaZoWQSAY'),
 (7, '1@1.1', 0, '$argon2i$v=19$m=65536,t=4,p=1$NDVhUjc3Mml2WWpzQ1dXZw$6E1xrkR4cr6w/LQq6ElHUrLzRmXIva5Y6AofLbwMJIU'),
 (8, '2@2.2', 0, '$argon2i$v=19$m=65536,t=4,p=1$bzV1ZWw3Z25MYlJMenBVeQ$Uy8/0aYAKib3e4OIVV2Q94qm+78hCTrrkOP535n+uVk'),
-(9, '3@3.3', 0, '$argon2i$v=19$m=65536,t=4,p=1$MFdxRi81U1ovS1IxaFBYdA$PUAWpAnlQC8mh99zp1c0LuLldaHxt6SsKgp1OvczWc8');
+(9, '3@3.3', 0, '$argon2i$v=19$m=65536,t=4,p=1$MFdxRi81U1ovS1IxaFBYdA$PUAWpAnlQC8mh99zp1c0LuLldaHxt6SsKgp1OvczWc8'),
+(10, 't@t.t', 0, '$argon2i$v=19$m=65536,t=4,p=1$MEM2WDgxcHRmMVVmbzBhcg$zvXc0IWDmZeGeukh+stFiAlM3ifTaaXRZgPrO/b1SW8'),
+(11, 'k@k.k', 0, '$argon2i$v=19$m=65536,t=4,p=1$cWpSUmtWZVBQM2t3SjZVZA$0h9ibDIm1ypLwe49SgoaG3cYFusK5ezDeSTB/lg9QVY'),
+(12, '', 0, '$argon2i$v=19$m=65536,t=4,p=1$TndoVTBsNXBVSVZLNFN2aQ$JIgtr9fdpHEAifx2uwYj5d1mrIQVod5BwAaYWgHFdks');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -120,13 +115,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT dla tabeli `post`
 --
 ALTER TABLE `post`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT dla tabeli `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -29,7 +29,7 @@ class User {
 
     public static function register(string $email, string $password) : bool {
         global $db;
-        $query = $db->prepare("INSERT INTO user VALUES(NULL, ?, ?)");
+        $query = $db->prepare("INSERT INTO user VALUES(NULL, ?, 0, ?)");
         $passwordHash = password_hash($password, PASSWORD_ARGON2I);
         $query->bind_param('ss', $email, $passwordHash);
         return $query->execute();

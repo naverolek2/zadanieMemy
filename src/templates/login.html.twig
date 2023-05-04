@@ -1,12 +1,31 @@
-{% include 'header.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageTitle|default("Strona z memami") }}</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    
+
 <div id="pageContainer">
-<h1>{{pageTitle}}</h1>
-<form action="" method="post">
+<header>
+    
+    <div id="tytuldiv">
+        <a href="http://localhost/zadanieMemy/pub/" id="tytul">{{pageTitle}}</a>  
+      </div>
+  
+</header>
+
+
+<form action="" method="post" id="formularzWgrywania">
     <label for="emailInput">Podaj adres e-mail:</label>
-    <input type="email" name="email" id="emailInput"><br>
-    <label for="passwordInput">Podaj hasło</label>
-    <input type="password" name="password" id="passwordInput" ><br>
-    <input type="submit" name="submit" value="Zaloguj">
+    <input type="email" name="email" id="emailInput" placeholder="mail"><br>
+    <label for="passwordInput">Podaj hasło</label><br>
+    <input type="password" name="password" id="passwordInput" placeholder="hasło masło"><br>
+    <input type="submit" name="submit" value="Zaloguj" id="zalogujButton">
 
 </form> 
 {% if message is defined %}

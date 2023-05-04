@@ -1,0 +1,47 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: lightgray;
+}
+
+#formularzWgrywania {
+    width: 300px;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid rgb(143, 134, 134);
+    padding: 5px;
+    background-color: lightgray;
+}
+#pageContainer > a  {
+    margin-right: auto;
+    margin-left: auto;
+}
+.inputForm{
+margin-bottom: 10px;
+
+}
+.inputForm:hover, #uploadedFileInput:hover {
+    cursor: pointer;
+}
+header {
+    background-color: rgb(158, 153, 153);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+}
+#tytuldiv {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+#tytul {
+    font-size: xx-large;
+    text-decoration: none;
+    color: black;
+    
+    
+}
+#loggedUser {
+    width: 400px;
+}

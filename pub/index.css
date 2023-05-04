@@ -1,0 +1,53 @@
+body {
+    background-color: rgb(167, 156, 156);
+}
+#tytuldiv {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+#tytul {
+    font-size: xx-large;
+    text-decoration: none;
+    color: black;
+    
+    
+}
+#przyk {
+    display: flex;
+    justify-content: flex-end;
+}
+#admin {
+    text-decoration: none;
+    color: black;
+
+}
+#admin:hover  {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#loggedUser {
+    
+    width: 60%;
+}
+#loggedUser > * {
+    margin-left: 7px;
+}
+#loggedUser > a {
+    text-decoration: none;
+    color: black;
+}
+#loggedUser > a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#logowania > a {
+    text-decoration: none;
+    color: black;
+    margin-right: 5px;
+}
+#logowania > a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
