@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 04 Maj 2023, 11:26
+-- Czas generowania: 04 Maj 2023, 22:43
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -58,6 +58,13 @@ CREATE TABLE `post` (
   `removed` tinyint(1) NOT NULL DEFAULT 0,
   `userID` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Zrzut danych tabeli `post`
+--
+
+INSERT INTO `post` (`ID`, `timestamp`, `filename`, `title`, `likes`, `removed`, `userID`) VALUES
+(1, '2023-05-04 22:40:04', 'img/48021e813b80d90fdb71c089394d1208c1334fbe94e9f382559d1534af54152f.webp', 'gegeg', -1, 0, 3);
 
 -- --------------------------------------------------------
 
@@ -115,7 +122,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT dla tabeli `post`
 --
 ALTER TABLE `post`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT dla tabeli `user`
